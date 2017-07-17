@@ -1,4 +1,12 @@
-import { createStore } from 'redux';
+import { compose, createStore } from 'redux';
+import { autoRehydrate, persistStore } from 'redux-persist';
 import reducer from './ducks/productsReducer';
 
-export default createStore(reducer);
+
+let store = compose(
+  autoRehydrate()
+)(createStore)(reducer);
+
+persistStore(store);
+
+export default store;

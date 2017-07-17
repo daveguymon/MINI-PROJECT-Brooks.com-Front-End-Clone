@@ -76,6 +76,7 @@ const initialState ={
 
 const ADD_TO_CART = 'ADD_TO_CART';
 const DELETE_FROM_CART = 'DELETE_FROM_CART';
+const PERSIST_REHYDRATE = 'persist/REHYDRATE';
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
@@ -88,8 +89,10 @@ export default function reducer(state=initialState, action) {
         return (
           Object.assign({}, state, {cart: newCartArr })
         )
-        default:
-          return state;
+    case PERSIST_REHYDRATE:
+      return { ...state, persistedState: action.payload };
+    default:
+      return state;
   }
 
 }
